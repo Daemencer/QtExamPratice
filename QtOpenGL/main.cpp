@@ -1,12 +1,16 @@
 #include <QApplication>
 
-#include "MainWindow.h"
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glew32.lib")
+
+#include "RenderWindow.h"
+
 auto	main(int argc, char* argv[]) -> int
 {
 	qsrand(qrand());
 
 	QApplication app(argc, argv);
-	MainWindow* window = new MainWindow();
+	RenderWindow* window = new RenderWindow();
 	window->show();
 
 	return app.exec();

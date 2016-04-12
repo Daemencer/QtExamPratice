@@ -1,7 +1,12 @@
 #pragma once
 
+#include "glew.h"
+
 #include <QOpenGLWidget>
 #include <QTimer>
+
+class ShaderManager;
+class CubeModel;
 
 class CustomOpenGLWidget
 	: public QOpenGLWidget
@@ -38,6 +43,9 @@ protected:
 private:
 	Color m_color = { 0.25f, 0.25f, 0.25f, 1.f };
 	QTimer m_timer;
+
+	ShaderManager*		m_shaderMgr = nullptr;
+	CubeModel*			m_cube		= nullptr;
 
 public slots:
 	void ApplyRandomRed();
