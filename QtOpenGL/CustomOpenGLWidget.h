@@ -63,7 +63,7 @@ private:
 	CubeModel*			m_cube		= nullptr;
 
 public slots:
-	auto	TranslateXPos() -> void;
+	void	TranslateXPos();
 
 };
 

@@ -73,7 +73,7 @@ auto CustomOpenGLWidget::resizeGL(int w, int h) -> void
 }
 
 
-auto	CustomOpenGLWidget::TranslateXPos() -> void
+void	CustomOpenGLWidget::TranslateXPos()
 {
 	double value = 2.f;
 
