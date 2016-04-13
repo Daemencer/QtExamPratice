@@ -46,6 +46,10 @@ auto CustomOpenGLWidget::paintGL() -> void
 	GLuint program = m_shaderMgr->GetProgram("basic");
 	glUseProgram(program);
 
+	//glEnable(GL_CULL_FACE);
+	glFrontFace(GL_CCW);
+	//glEnable(GL_DEPTH_TEST);
+
 	glClearColor(m_color.red, m_color.green, m_color.blue, m_color.alpha);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -54,9 +58,9 @@ auto CustomOpenGLWidget::paintGL() -> void
 	GLuint viewMatrixPos = glGetUniformLocation(program, "viewMatrix");
 	GLuint projectMatrixPos = glGetUniformLocation(program, "projectMatrix");
 
-	glUniformMatrix4fv(worldMatrixPos, 1, GL_FALSE, &m_worldMatrix[0][0]);
-	glUniformMatrix4fv(viewMatrixPos, 1, GL_FALSE, &m_viewMatrix[0][0]);
-	glUniformMatrix4fv(projectMatrixPos, 1, GL_FALSE, &m_projectMatrix[0][0]);
+	glUniformMatrix4fv(worldMatrixPos, 1, GL_TRUE, &m_worldMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixPos, 1, GL_TRUE, &m_viewMatrix[0][0]);
+	glUniformMatrix4fv(projectMatrixPos, 1, GL_TRUE, &m_projectMatrix[0][0]);
 
 	////////////
 
@@ -88,6 +92,10 @@ auto	CustomOpenGLWidget::_InitMatrices() -> void
 	m_objectScale		= glm::mat4(1.f);
 
 	m_worldMatrix	= glm::mat4(1.f);
-	m_viewMatrix	= glm::lookAt(glm::vec3(0.f, 1.f, 0.f), glm::vec3(0.f, -1.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
-	m_projectMatrix	= glm::perspective(60.f, (float)4/3, 1.f, 1000.f);
+
+	//m_worldMatrix = glm::translate(m_worldMatrix, glm::vec3(0.f, 0.f, -10.f));
+
+	m_viewMatrix = glm::lookAt(glm::vec3(0.f, 0.f, 1.f), glm::vec3(0.f, 0.f, -10.f), glm::vec3(0.f, 1.f, 0.f));
+	//m_viewMatrix	= glm::mat4(1.f);
+	m_projectMatrix	= glm::perspective(60.f, 4.f/3.f, 0.1f, 1000.f);
 }

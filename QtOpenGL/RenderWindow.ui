@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1095</width>
-    <height>600</height>
+    <width>684</width>
+    <height>544</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,84 +30,27 @@
     <property name="spacing">
      <number>0</number>
     </property>
-    <item row="5" column="2">
-     <widget class="CustomOpenGLWidget" name="openGLWidget"/>
+    <item row="3" column="2" rowspan="2">
+     <widget class="CustomOpenGLWidget" name="openGLWidget">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+     </widget>
     </item>
-    <item row="0" column="2">
-     <widget class="QFrame" name="frame">
-      <property name="maximumSize">
-       <size>
-        <width>16777215</width>
-        <height>30</height>
-       </size>
+    <item row="3" column="3">
+     <widget class="QPushButton" name="translateXPosButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
       </property>
-      <property name="frameShape">
-       <enum>QFrame::StyledPanel</enum>
+      <property name="text">
+       <string>TranslateXPos</string>
       </property>
-      <property name="frameShadow">
-       <enum>QFrame::Raised</enum>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout">
-       <property name="spacing">
-        <number>0</number>
-       </property>
-       <property name="leftMargin">
-        <number>0</number>
-       </property>
-       <property name="topMargin">
-        <number>0</number>
-       </property>
-       <property name="rightMargin">
-        <number>0</number>
-       </property>
-       <property name="bottomMargin">
-        <number>0</number>
-       </property>
-       <item>
-        <widget class="QPushButton" name="pushButton">
-         <property name="text">
-          <string>Random Red</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_2">
-         <property name="text">
-          <string>Random Green</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_3">
-         <property name="text">
-          <string>Random Blue</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <spacer name="horizontalSpacer">
-         <property name="orientation">
-          <enum>Qt::Horizontal</enum>
-         </property>
-         <property name="sizeType">
-          <enum>QSizePolicy::Fixed</enum>
-         </property>
-         <property name="sizeHint" stdset="0">
-          <size>
-           <width>40</width>
-           <height>20</height>
-          </size>
-         </property>
-        </spacer>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButton_4">
-         <property name="text">
-          <string>Default Color</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
      </widget>
     </item>
    </layout>
@@ -119,76 +62,25 @@
    <extends>QOpenGLWidget</extends>
    <header>customopenglwidget.h</header>
    <slots>
-    <slot>ApplyRandomRed()</slot>
-    <slot>ApplyRandomGreen()</slot>
-    <slot>ApplyRandomBlue()</slot>
-    <slot>ApplyDefaultColor()</slot>
+    <slot>TranslateXPos()</slot>
    </slots>
   </customwidget>
  </customwidgets>
  <resources/>
  <connections>
   <connection>
-   <sender>pushButton</sender>
+   <sender>translateXPosButton</sender>
    <signal>clicked()</signal>
    <receiver>openGLWidget</receiver>
-   <slot>ApplyRandomRed()</slot>
+   <slot>TranslateXPos()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>66</x>
-     <y>19</y>
+     <x>645</x>
+     <y>11</y>
     </hint>
     <hint type="destinationlabel">
-     <x>77</x>
-     <y>126</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_2</sender>
-   <signal>clicked()</signal>
-   <receiver>openGLWidget</receiver>
-   <slot>ApplyRandomGreen()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>342</x>
-     <y>13</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>347</x>
-     <y>101</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_3</sender>
-   <signal>clicked()</signal>
-   <receiver>openGLWidget</receiver>
-   <slot>ApplyRandomBlue()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>603</x>
-     <y>15</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>607</x>
-     <y>81</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>pushButton_4</sender>
-   <signal>clicked()</signal>
-   <receiver>openGLWidget</receiver>
-   <slot>ApplyDefaultColor()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>953</x>
-     <y>19</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>953</x>
-     <y>54</y>
+     <x>303</x>
+     <y>271</y>
     </hint>
    </hints>
   </connection>
