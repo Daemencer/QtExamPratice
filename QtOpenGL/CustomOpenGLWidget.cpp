@@ -33,6 +33,8 @@ auto CustomOpenGLWidget::initializeGL() -> void
 	m_cube->Initialize(program);
 	/////////
 
+	_InitMatrices();
+
 	//glClearColor(m_color.red, m_color.green, m_color.blue, m_color.alpha);
 
 	connect(&m_timer, SIGNAL(timeout()), this, SLOT(update()));
@@ -48,15 +50,14 @@ auto CustomOpenGLWidget::paintGL() -> void
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// matrix //
-	float matrix[16] = {
-		1.0f, 0.0f, 0.0f, 0.0f,
-		0.0f, 1.0f, 0.0f, 0.0f,
-		0.0f, 0.0f, 1.0f, 0.0f,
-		0.0f, 0.0f, 0.0f, 1.0f
-	};
+	GLuint worldMatrixPos = glGetUniformLocation(program, "worldMatrix");
+	GLuint viewMatrixPos = glGetUniformLocation(program, "viewMatrix");
+	GLuint projectMatrixPos = glGetUniformLocation(program, "projectMatrix");
 
-	GLuint matrixPos = glGetUniformLocation(program, "matrix");
-	glUniformMatrix4fv(matrixPos, 1, GL_FALSE, matrix);
+	glUniformMatrix4fv(worldMatrixPos, 1, GL_FALSE, &m_worldMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixPos, 1, GL_FALSE, &m_viewMatrix[0][0]);
+	glUniformMatrix4fv(projectMatrixPos, 1, GL_FALSE, &m_projectMatrix[0][0]);
+
 	////////////
 
 	GLuint vao = m_cube->GetModelVAO();
@@ -71,22 +72,22 @@ auto CustomOpenGLWidget::resizeGL(int w, int h) -> void
 	glViewport(0, 0, w, h);
 }
 
-void CustomOpenGLWidget::ApplyRandomRed()
+
+auto	CustomOpenGLWidget::TranslateXPos() -> void
 {
-	m_color.red = static_cast <float> (qrand()) / static_cast <float> (RAND_MAX);
+	double value = 2.f;
+
+	m_worldMatrix = glm::translate(m_worldMatrix, glm::vec3(value, 0.f, 0.f));
 }
 
-void CustomOpenGLWidget::ApplyRandomGreen()
-{
-	m_color.green = static_cast <float> (qrand()) / static_cast <float> (RAND_MAX);
-}
 
-void CustomOpenGLWidget::ApplyRandomBlue()
+auto	CustomOpenGLWidget::_InitMatrices() -> void
 {
-	m_color.blue = static_cast <float> (qrand()) / static_cast <float> (RAND_MAX);
-}
+	m_objectTranslate	= glm::mat4(1.f);
+	m_objectRotate		= glm::mat4(1.f);
+	m_objectScale		= glm::mat4(1.f);
 
-void CustomOpenGLWidget::ApplyDefaultColor()
-{
-	m_color = { 0.25f, 0.25f, 0.25f, 1.f };
+	m_worldMatrix	= glm::mat4(1.f);
+	m_viewMatrix	= glm::lookAt(glm::vec3(0.f, 1.f, 0.f), glm::vec3(0.f, -1.f, 0.f), glm::vec3(0.f, 0.f, 1.f));
+	m_projectMatrix	= glm::perspective(60.f, (float)4/3, 1.f, 1000.f);
 }
